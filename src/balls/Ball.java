@@ -7,60 +7,82 @@ import java.util.Random;
 public class Ball {
 
     private Component canvas;
-    private static final int XSIZE = 20;
-    private static final int YSIZE = 20;
+    private Color color;
+    private int x;
+    private int y;
 
-    private int x = 0;
-    private int y= 0;
+    private static final int SIZE = 20;
+
     private int dx = 2;
     private int dy = 2;
 
     public Ball(Component c) {
-        this.canvas = c;
+
+        canvas = c;
+        color = ballColor();
 
         x = (int) (new Random().nextInt(this.canvas.getWidth()) * Math.random());
         y = (int) (new Random().nextInt(this.canvas.getHeight()) * Math.random());
     }
 
-    public static void f(){
-        int a = 0;
-    }
-
     public void draw (Graphics2D g2) {
 
-        g2.setColor(Color.darkGray);
-        g2.fill(new Ellipse2D.Double(x,y,XSIZE,YSIZE));
+        g2.setColor(color);
+        g2.fill(new Ellipse2D.Double(x,y,SIZE,SIZE));
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void move(){
 
-        x+=dx;
-        y+=dy;
+        x += dx;
+        y += dy;
 
-        if (x<0) {
+        if (x < 0) {
 
             x = 0;
             dx = -dx;
         }
 
-        if (x+XSIZE>=this.canvas.getWidth()) {
+        if (x + SIZE >= this.canvas.getWidth()) {
 
-            x = this.canvas.getWidth()-XSIZE;
+            x = this.canvas.getWidth() - SIZE;
             dx = -dx;
         }
 
-        if (y<0) {
+        if (y < 0) {
 
-            y=0;
+            y = 0;
             dy = -dy;
         }
 
-        if (y+YSIZE>=this.canvas.getHeight()) {
+        if (y + SIZE >= this.canvas.getHeight()) {
 
-            y = this.canvas.getHeight()-YSIZE;
+            y = this.canvas.getHeight() - SIZE;
             dy = -dy;
         }
 
         this.canvas.repaint();
+    }
+
+    private Color ballColor() {
+
+        Random random = new Random();
+        int randomNumber = random.nextInt(3);
+
+        switch (randomNumber) {
+            case 0:
+                return Color.blue;
+            case 1:
+                return Color.magenta;
+            default:
+                return Color.orange;
+        }
     }
 }

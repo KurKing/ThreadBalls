@@ -1,12 +1,14 @@
 package balls;
 
+import java.util.function.IntBinaryOperator;
+
 public class BallThread extends Thread {
 
-    private Ball b;
+    private BallMovementManager ballManager;
 
-    public BallThread(Ball ball) {
+    public BallThread(BallMovementManager ballManager) {
 
-        b = ball;
+        this.ballManager = ballManager;
     }
 
     @Override
@@ -14,14 +16,13 @@ public class BallThread extends Thread {
 
         try {
 
-            for (int i=1; i<10000; i++) {
+            while (true) {
 
-                b.move();
                 System.out.println("Move in thread #" + Thread.currentThread().getName());
+
+                if (!ballManager.move()) { interrupt(); }
                 Thread.sleep(5);
             }
-        } catch(InterruptedException ex) {
-
-        }
+        } catch(InterruptedException ex) {}
     }
 }
