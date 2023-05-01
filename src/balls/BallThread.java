@@ -23,6 +23,9 @@ public class BallThread extends Thread {
                 if (!ballManager.move()) { interrupt(); }
                 Thread.sleep(5);
             }
-        } catch(InterruptedException ex) {}
+        } catch(InterruptedException ex) {
+
+            System.out.println("InterruptedException in thread #" + Thread.currentThread().getName());
+        }
     }
 }

@@ -8,6 +8,7 @@ import java.awt.*;
 public class BounceFrame extends JFrame {
 
     private BallCanvas canvas;
+    private ButtonPanel buttonPanel;
 
     public static final int WIDTH = 450;
     public static final int HEIGHT = 350;
@@ -23,7 +24,7 @@ public class BounceFrame extends JFrame {
         Container content = this.getContentPane();
         content.add(this.canvas, BorderLayout.CENTER);
 
-        JPanel buttonPanel = ButtonPanelBuilder.build(new BallCreationOperator() {
+        buttonPanel = new ButtonPanel(new BallCreationOperator() {
             @Override
             public void createBall() {
 
@@ -33,7 +34,9 @@ public class BounceFrame extends JFrame {
                 BallRemovingOperator removingOperator = new BallRemovingOperator() {
                     @Override
                     public void removeBall(Ball ball) {
+
                         canvas.remove(ball);
+                        buttonPanel.updateScore();
                     }
                 };
 
