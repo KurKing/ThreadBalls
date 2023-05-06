@@ -16,6 +16,27 @@ public class Ball {
     private int dx = 2;
     private int dy = 2;
 
+    // Init for join
+    public Ball(Component c, Color color, int x, int y) {
+
+        canvas = c;
+        this.color = color;
+
+        this.x = x;
+        this.y = y;
+        dy = 0;
+    }
+
+    // Init for red black
+    public Ball(Component c, Color color) {
+
+        canvas = c;
+        this.color = color;
+
+        x = 10;
+        y = 10;
+    }
+
     public Ball(Component c) {
 
         canvas = c;

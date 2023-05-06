@@ -12,7 +12,9 @@ public class ButtonPanel extends JPanel {
     private JLabel scoreLabel;
     private int score = 0;
 
-    public ButtonPanel(BallCreationOperator ball) {
+    public ButtonPanel(BallCreationOperator ball,
+                       BallCreationOperator redBlackOperator,
+                       BallCreationOperator joinOperator) {
 
         super();
 
@@ -24,6 +26,9 @@ public class ButtonPanel extends JPanel {
         addBallCreationButton(1, ball);
         addBallCreationButton(10, ball);
         addBallCreationButton(100, ball);
+
+        addRedBlackBallsButton(redBlackOperator);
+        addJoinButton(joinOperator);
 
         addStopButton();
     }
@@ -55,6 +60,36 @@ public class ButtonPanel extends JPanel {
         });
 
         add(buttonAddBall);
+    }
+
+    private void addRedBlackBallsButton(BallCreationOperator redBlackOperator) {
+
+        JButton buttonStop = new JButton("Red black balls");
+
+        buttonStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                redBlackOperator.createBall();
+            }
+        });
+
+        add(buttonStop);
+    }
+
+    private void addJoinButton(BallCreationOperator joinOperator) {
+
+        JButton buttonStop = new JButton("Join");
+
+        buttonStop.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                joinOperator.createBall();
+            }
+        });
+
+        add(buttonStop);
     }
 
     private void addStopButton() {

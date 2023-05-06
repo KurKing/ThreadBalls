@@ -1,14 +1,22 @@
 package balls;
 
-import java.util.function.IntBinaryOperator;
+import java.util.Optional;
 
 public class BallThread extends Thread {
 
     private BallMovementManager ballManager;
+    private Optional<Thread> threadToJoin;
 
     public BallThread(BallMovementManager ballManager) {
 
         this.ballManager = ballManager;
+        this.threadToJoin = Optional.empty();
+    }
+
+    public BallThread(BallMovementManager ballManager, Thread threadToJoin) {
+
+        this.ballManager = ballManager;
+        this.threadToJoin = Optional.of(threadToJoin);
     }
 
     @Override
@@ -16,9 +24,14 @@ public class BallThread extends Thread {
 
         try {
 
-            while (true) {
+            while (!isInterrupted()) {
 
                 System.out.println("Move in thread #" + Thread.currentThread().getName());
+
+                if (threadToJoin.isPresent()) {
+
+                    threadToJoin.get().join();
+                }
 
                 if (!ballManager.move()) { interrupt(); }
                 Thread.sleep(5);
