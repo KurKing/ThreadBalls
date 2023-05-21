@@ -26,8 +26,6 @@ public class BallThread extends Thread {
 
             while (!isInterrupted()) {
 
-                System.out.println("Move in thread #" + Thread.currentThread().getName());
-
                 if (threadToJoin.isPresent()) {
 
                     threadToJoin.get().join();

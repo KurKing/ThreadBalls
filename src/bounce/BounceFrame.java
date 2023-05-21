@@ -19,8 +19,6 @@ public class BounceFrame extends JFrame {
         this.setTitle("Bounce program");
         this.canvas = new BallCanvas();
 
-        System.out.println("Create frame in thread #" + Thread.currentThread().getName());
-
         Container content = this.getContentPane();
         content.add(this.canvas, BorderLayout.CENTER);
 
@@ -75,12 +73,12 @@ public class BounceFrame extends JFrame {
             @Override
             public void createBall() {
 
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 50; i++) {
 
                     createPriorityBall(Color.red, true);
                 }
 
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 50; i++) {
 
                     createPriorityBall(Color.black, false);
                 }
