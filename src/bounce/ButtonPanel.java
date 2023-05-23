@@ -33,7 +33,7 @@ public class ButtonPanel extends JPanel {
         addStopButton();
     }
 
-    public void updateScore() {
+    synchronized public void updateScore() {
 
         score += 1;
         scoreLabel.setText("Score: " + score);
